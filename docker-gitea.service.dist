@@ -8,15 +8,14 @@ Restart=always
 
 WorkingDirectory=/opt/docker-compose-gitea/
 
-# Remove old containers, images and volumes
-ExecStartPre=/usr/local/bin/docker-compose down -v
-ExecStartPre=/usr/local/bin/docker-compose rm -v
+# Update images if needed
+ExecStartPre=/usr/bin/docker-compose pull
 
 # Compose up
 ExecStart=/usr/local/bin/docker-compose up
 
 # Compose down, remove containers and volumes
-ExecStop=/usr/local/bin/docker-compose down -v
+ExecStop=/usr/local/bin/docker-compose down
 
 [Install]
 WantedBy=multi-user.target
